@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+ 
+ Veriety products
+
+   {% endblock %}
+   {% block title %}
+   Search
+   {% endblock %}
+   {% block content %}
+   <div>
+    <p class="text-center my-search_text">You have seacrch for: <b>"{{query}}"</b></p>
+   </div>
+   <div class="container">
+    <div class="row mx-auto">
+        {% for p in products %}
+        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 xol-lg-4">
+            <div class="card text-center" style="min-width: 20rem;">
+                <a href="{{p.get_url}}">
+                    <img class="card-img-top my_img" src="{{p.img.url}}" alt="{{p.name}}" style="height: 400px;">
+                </a>
+                <div class="card-body">
+                    <h4>{{p.name}}</h4>
+                    <p>{{p.price}}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="row mx-auto">
+            <p class="text-center my-search_text">0 result found</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+   {% endblock %}

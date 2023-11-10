@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+   {{ pro.description|truncatewords:155 }}
+
+   {% endblock %}
+
+ 
+
+   {% block titile %}
+   {% if category %}
+   {{pro.name}}-Easy store
+   {% else %}
+   new collections
+   {% endif %}
+   {% endblock %}
+
+
+
+{% block content %}
+
+<div class="row my_pro_row_class">
+    <div class="mx_auto">
+        <p><a href="{% url 'ecommerceapp:AllProCat' %}">Home</a>|<a href="{{pro.category.get_url}}">{{pro.category}}</a>|{{pro.name}}</p> <!--see all product-->
+    </div>
+</div>
+<div class="container">
+<br>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center" >
+        <div style="min-width: 18rem;">
+            <img src="{{pro.img.url}}" alt="{{pro.name}}" style="height: 250px;">
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <div>
+            <h1 class="my-pro-title">{{pro.name}}</h1>
+            <p>${{pro.price}}</p>
+            <p class="my_title">product Description</p>
+            <p class="text-justify my_pro_text">{{pro.des}}</p>
+            {% if pro.stock <= 0 %}
+            <p class="text-justify my_pro_text"><b>Out of stock</b></p>
+            {% else %}
+            <a class="btn btn-secondary" href="{% url 'cartapp:add_cart' pro.id %}">Add to Cart</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
